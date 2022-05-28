@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthcarepod
+  labels:
+    app: healthcare
+    environment: development
+  annotations:
+    author: sriman
+    imageRepository: http://reg.rconnect.org/k8s-virtual-repo
+spec:
+  containers:
+  - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+    name: healthcare
+    ports:
+      - containerPort: 8081
+        name: http
+        protocol: TCP
+        

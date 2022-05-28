@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthcare-deployment
+  labels:
+    app: healthcare
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      templatename: healthcaretemplate
+  template:
+    metadata:
+      labels:
+        templatename: healthcaretemplate
+    spec:
+      containers:
+        - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+          name: healthcare
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP    

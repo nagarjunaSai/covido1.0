@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthcarepod
+spec:
+  containers:
+    - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+      name: healthcare
+      volumeMounts:
+        - name: hcsqlvol
+          mountPath: /mysql
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+  volumes:
+    - name: hcsqlvol
+      persistentVolumeClaim:
+        claimName: hcmysqlpvc

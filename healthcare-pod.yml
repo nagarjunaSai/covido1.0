@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthcarepod
+spec:
+  containers:
+    - image: reg.rconnect.org/k8s-virtual-repo/healthcare:1.0
+      name: healthcare
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: healthcarerelicaset
+  labels:
+    app: healthcare
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      templateName: healthcaretemplate
+      stage: testing
+  template:
+    metadata:
+      labels:
+        templateName: healthcaretemplate
+        stage: testing
+    spec:
+      containers:
+        - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+          name: healthcare
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP  
+
+

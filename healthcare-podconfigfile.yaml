@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthcarepod
+  labels:
+    app: healthcare
+    environment: development
+spec:
+  containers:
+    - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+      name: healthcare
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP    
+      volumeMounts:
+        - name: healthcareconfig
+          mountPath: /config
+          readOnly: true    
+  volumes:
+    - name: healthcareconfig
+      configMap:
+        name: healthcareconfigfile
+        items:
+          - key: "bankaccounts.properties"
+            path: "bankaccounts.properties"
+          - key: "authorizedbanks.properties"
+            path: "authorizedbanks.properties"

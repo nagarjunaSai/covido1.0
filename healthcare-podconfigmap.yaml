@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: healthcarepod
+  labels:
+    app: healthcare
+    env: production
+spec:
+  containers:
+    - image: reg.rconnect.org/k8s-virtual-repo/healthcare:2.0
+      name: healthcare
+      env:
+        - name: db.driverClassname
+          valueFrom:
+            configMapKeyRef:
+              name: healthcaredbconfig
+              key: driverClassname  
+        - name: db.url
+          valueFrom:
+            configMapKeyRef:
+              name: healthcaredbconfig
+              key: url
+        - name: db.username
+          valueFrom:
+            configMapKeyRef:
+              name: healthcaredbconfig
+              key: username
+        - name: db.password
+          valueFrom:
+            configMapKeyRef:
+              name: healthcaredbconfig
+              key: password
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP            

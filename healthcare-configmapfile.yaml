@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: healthcareconfigfile
+data:
+  bankaccounts.properties: |
+    smith=239393
+    samuel=93987933
+    arnold=3938903
+  authorizedbanks.properties: |
+    axisbank=abx00003939
+    hdfc=hdv0393903
+
